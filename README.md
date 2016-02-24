@@ -410,4 +410,6 @@ sleuth live with:
 sleuth_live(so)
 ```
 
-Let's chat about what sort of things to look out for.
+Notes:
+
+The fragment length distribution is only available for the file we ran during this exercise (SRR49336)
