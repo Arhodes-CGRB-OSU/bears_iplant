@@ -360,9 +360,17 @@ so <- sleuth_prep(s2c, ~ condition, target_mapping = t2g)
 ## 42193 targets passed the filter
 ## normalizing tpm
 ## normalizing bootstrap samples
+## summarizing bootstraps
 ```
+You may get a warning
+```
+##Warning message:
+##In check_kal_pack(kal_list) :
+##  More than one version of kallisto was used: 0.42.40.42.3
+```
+You can ignore this.
 
-then
+Then
 
 ```r
 so <- sleuth_fit(so)
