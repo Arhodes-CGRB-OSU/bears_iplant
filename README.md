@@ -118,8 +118,8 @@ where:
 Run the following commands to start kallisto.  Note how fast it is compared to other counting programs.
 
 ```
-mkdir `/analysis/bears_iplant/results/paired/SRR493366
-kallisto quant -i `/analysis/bears_iplant/annotation/human_trans.kidx -b 30 --bias -t 2 \
+mkdir ~/analysis/bears_iplant/results/paired/SRR493366
+kallisto quant -i ~/analysis/bears_iplant/annotation/human_trans.kidx -b 30 --bias -t 2 \
   -o ~/analysis/bears_iplant/results/paired/SRR493366/kallisto \
   ~/analysis/bears_iplant/data/SRR493366/SRR493366_1.fastq.gz ~/analysis/bears_iplant/data/SRR493366/SRR493366_2.fastq.gz
 ```
