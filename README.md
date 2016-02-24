@@ -180,7 +180,7 @@ Start up RStudio and navigate to `R` subdirectory that you created on your deskt
 
 ```r
 setwd('~/Desktop/bears_iplant/')
-download.file("https://github.com/Arhodes-CGRB-OSU/bears_iplant/blob/master/results.tar.gz","results.tar.gz")
+download.file("http://teaching.cgrb.oregonstate.edu/MCB/Rhodes/RNA_Seq_Winter_2016/results.tar.gz","results.tar.gz")
 ```
 Leave R and go to the file directory and extract the "results.tar.gz" file in the same location.  On a Mac, I just double-clicked it, in Windows, you may need a program such as 7-zip or Winzip to unzip the file.
 
