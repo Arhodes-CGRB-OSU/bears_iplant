@@ -174,9 +174,18 @@ The human fibroblast RNA-Seq data for the paper is available on GEO at accession
 Make a directory on your desktop called "bears_iplant".  
 Inside that directory, make another directory named R
 
-Copy your output using WinSCP or Cyberduck into this directory.
+-------------------------
 
-Start up RStudio and navigate to `R` subdirectory that you created on your desktop.  Start by downloading the compressed data from the github.  You will need to exit R and extract the files in another program.  You should then have a '~/Desktop/bears_iplant/results' directory with all the subfolders needed for the activity.  Make sure you have created a directory on the desktop called 'bears_iplant'.
+If you chose to run your own program on the infrastructure, but your results directory into the '~/Desktop/bears_iplant/' directory instead of following these directions for downloading the results from R.  Copy your results directory from '~/analysis/bears_iplant/results/' using WinSCP or Cyberduck into '~/Desktop/bears_iplant/'.
+
+If you want to compress the directories before downloading, here is the command line:
+```
+tar -zcvf ~/analysis/iplant_bears/results.tar.gz ~/analysis/iplant_bears/results/
+```
+-------------------------
+
+If you chose NOT to run kallisto on the infrastructure, do the following.
+Start up RStudio and start by downloading the compressed data from our class directory.  
 
 ```r
 setwd('~/Desktop/bears_iplant/')
@@ -184,11 +193,22 @@ download.file("http://teaching.cgrb.oregonstate.edu/MCB/Rhodes/RNA_Seq_Winter_20
 ```
 Leave R and go to the file directory and extract the "results.tar.gz" file in the same location.  On a Mac, I just double-clicked it, in Windows, you may need a program such as 7-zip or Winzip to unzip the file.
 
-Navigate to `R` subdirectory, the remaining codes are written from this relative directory.  You may need to make the directory R inside your /bears_iplant/ directory.
+You should then have a '~/Desktop/bears_iplant/results' directory with all the subfolders needed for the activity.  
+
+Make sure you have created a directory on the desktop called 'bears_iplant'.  This directory should now contain the 'results/' directory and the empty 'R/' directory.
+
+----------------------------------
+
+Navigate to `R` subdirectory, the remaining codes are written from this relative directory.  
+
+Reopen Rstudio and make sure you are in the right directory.
+
 ```r
 setwd('~/Desktop/bears_iplant/R')
 ```
 Once you are in this directory, you can either start typing the code below, or copy and paste the entire program from [`analysis.R`](https://raw.githubusercontent.com/Arhodes-CGRB-OSU/bears_iplant/gh-pages/R/analysis.R) into a new R file. (This will only work if the file directories are set up as above). You can execute a line in Rstudio using `ctrl + enter`.
+
+If you are not crunched for time, I encourage you to run the following code in sections, by copying and pasting into the console.
 
 First, let's install `sleuth` and `biomaRt`, a tool that we will use later for
 getting the gene names:
