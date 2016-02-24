@@ -364,9 +364,9 @@ so <- sleuth_prep(s2c, ~ condition, target_mapping = t2g)
 ```
 You may get a warning
 ```
-##Warning message:
-##In check_kal_pack(kal_list) :
-##  More than one version of kallisto was used: 0.42.40.42.3
+## Warning message:
+## In check_kal_pack(kal_list) :
+##   More than one version of kallisto was used: 0.42.40.42.3
 ```
 You can ignore this.
 
