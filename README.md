@@ -118,10 +118,31 @@ where:
 Run the following commands to start kallisto.  Note how fast it is compared to other counting programs.
 
 ```
-mkdir `/analysis/bears_iplant/results/paired/SRR493366
-kallisto quant -i `/analysis/bears_iplant/annotation/human_trans.kidx -b 30 --bias -t 2 \
+mkdir ~/analysis/bears_iplant/results/paired/SRR493366
+kallisto quant -i ~/analysis/bears_iplant/annotation/human_trans.kidx -b 30 --bias -t 2 \
   -o ~/analysis/bears_iplant/results/paired/SRR493366/kallisto \
   ~/analysis/bears_iplant/data/SRR493366/SRR493366_1.fastq.gz ~/analysis/bears_iplant/data/SRR493366/SRR493366_2.fastq.gz
+```
+These lines will output to your screen while Kallisto is running.  The [bstrp] line will count up to 30, since we chose -b 30 in our command line.  This run
+
+```
+[quant] fragment length distribution will be estimated from the data
+[index] k-mer length: 31
+[index] number of targets: 173,259
+[index] number of k-mers: 104,344,666
+[index] number of equivalence classes: 695,212
+[quant] running in paired-end mode
+[quant] will process pair 1: /nfs1/Teaching/home/rhodesad_rna_w16/analysis/bears_iplant/data/SRR493366/SRR493366_1.fastq.gz
+                             /nfs1/Teaching/home/rhodesad_rna_w16/analysis/bears_iplant/data/SRR493366/SRR493366_2.fastq.gz
+[quant] finding pseudoalignments for the reads ... done
+[quant] learning parameters for sequence specific bias
+[quant] processed 15,117,833 reads, 14,114,661 reads pseudoaligned
+[quant] estimated average fragment length: 170.192
+[   em] quantifying the abundances ... done
+[   em] the Expectation-Maximization algorithm ran for 1,595 rounds
+[bstrp] number of EM bootstraps complete: 30: 17
+
+2253.668u 7.747s 20:30.42 183.7%	0+0k 10066352+49576io 0pf+0w
 ```
 
 ### output
@@ -153,21 +174,41 @@ The human fibroblast RNA-Seq data for the paper is available on GEO at accession
 Make a directory on your desktop called "bears_iplant".  
 Inside that directory, make another directory named R
 
-Copy your output using WinSCP or Cyberduck into this directory.
+-------------------------
 
-Start up RStudio and navigate to `R` subdirectory that you created on your desktop.  Start by downloading the compressed data from the github.  You will need to exit R and extract the files in another program.  You should then have a '~/Desktop/bears_iplant/results' directory with all the subfolders needed for the activity.  Make sure you have created a directory on the desktop called 'bears_iplant'.
+If you chose to run your own program on the infrastructure, but your results directory into the '~/Desktop/bears_iplant/' directory instead of following these directions for downloading the results from R.  Copy your results directory from '~/analysis/bears_iplant/results/' using WinSCP or Cyberduck into '~/Desktop/bears_iplant/'.
+
+If you want to compress the directories before downloading, here is the command line:
+```
+tar -zcvf ~/analysis/iplant_bears/results.tar.gz ~/analysis/iplant_bears/results/
+```
+-------------------------
+
+If you chose NOT to run kallisto on the infrastructure, do the following.
+Start up RStudio and start by downloading the compressed data from our class directory.  
 
 ```r
 setwd('~/Desktop/bears_iplant/')
-download.file("https://github.com/Arhodes-CGRB-OSU/bears_iplant/blob/master/results.tar.gz","results.tar.gz")
+download.file("http://teaching.cgrb.oregonstate.edu/MCB/Rhodes/RNA_Seq_Winter_2016/results.tar.gz","results.tar.gz")
 ```
 Leave R and go to the file directory and extract the "results.tar.gz" file in the same location.  On a Mac, I just double-clicked it, in Windows, you may need a program such as 7-zip or Winzip to unzip the file.
 
-Navigate to `R` subdirectory, the remaining codes are written from this relative directory.  You may need to make the directory R inside your /bears_iplant/ directory.
+You should then have a '~/Desktop/bears_iplant/results' directory with all the subfolders needed for the activity.  
+
+Make sure you have created a directory on the desktop called 'bears_iplant'.  This directory should now contain the 'results/' directory and the empty 'R/' directory.
+
+----------------------------------
+
+Navigate to `R` subdirectory, the remaining codes are written from this relative directory.  
+
+Reopen Rstudio and make sure you are in the right directory.
+
 ```r
 setwd('~/Desktop/bears_iplant/R')
 ```
 Once you are in this directory, you can either start typing the code below, or copy and paste the entire program from [`analysis.R`](https://raw.githubusercontent.com/Arhodes-CGRB-OSU/bears_iplant/gh-pages/R/analysis.R) into a new R file. (This will only work if the file directories are set up as above). You can execute a line in Rstudio using `ctrl + enter`.
+
+If you are not crunched for time, I encourage you to run the following code in sections, by copying and pasting into the console.
 
 First, let's install `sleuth` and `biomaRt`, a tool that we will use later for
 getting the gene names:
@@ -290,6 +331,8 @@ Since the gene names are not automatically in the annotation, we need to get
 them from elsewhere. `biomaRt` provide a good way of getting the mappings for
 Ensembl annotations.
 
+This will take some time because it is downloading information over the internet.  Go get some coffee or stretch while this is running.
+
 ```r
 # get the gene names using biomaRt
 mart <- biomaRt::useMart(biomart = "ENSEMBL_MART_ENSEMBL",
@@ -317,9 +360,17 @@ so <- sleuth_prep(s2c, ~ condition, target_mapping = t2g)
 ## 42193 targets passed the filter
 ## normalizing tpm
 ## normalizing bootstrap samples
+## summarizing bootstraps
 ```
+You may get a warning
+```
+## Warning message:
+## In check_kal_pack(kal_list) :
+##   More than one version of kallisto was used: 0.42.40.42.3
+```
+You can ignore this.
 
-then
+Then
 
 ```r
 so <- sleuth_fit(so)
@@ -359,4 +410,14 @@ sleuth live with:
 sleuth_live(so)
 ```
 
-Let's chat about what sort of things to look out for.
+Notes:
+
+The fragment length distribution is only available for the file we ran during this exercise (SRR49336)
+
+Try plugging in the gene "ABCC4" in gene view (in the first tab analyses).  It will show the results of three transcripts that map to this gene.  Leave the other dropdown boxes as their default values.
+
+Find another gene of interest by looking at test table, leaving the table type as transcript table, and scrolling all the way over to the right to see the names of genes.
+
+Try plugging in the following list of genes into the heatmap tool, under the analyses tab.
+
+ENST00000075120 ENST00000244745 ENST00000249749 ENST00000257497 ENST00000263734 ENST00000296677 ENST00000296861 ENST00000298198 ENST00000343411 ENST00000376887 ENST00000602540 ENST00000256646 ENST00000366794 ENST00000301178 ENST00000257770 ENST00000286713 ENST00000305409 ENST00000311922 ENST00000244741 ENST00000274289 ENST00000344120 ENST00000291295 ENST00000423485 ENST00000361475 ENST00000262209 ENST00000343200 ENST00000340006 ENST00000542748 ENST00000295927 ENST00000319211 ENST00000217939 ENST00000403663 ENST00000220597 ENST00000264036 ENST00000342745 ENST00000359092 ENST00000286364 ENST00000380191 ENST00000252809 ENST00000438257 ENST00000392748 ENST00000369448 ENST00000379454 ENST00000266682 ENST00000234590 ENST00000302418 ENST00000325327 ENST00000300403 ENST00000265362 ENST00000432648 ENST00000398104 ENST00000381151 ENST00000257527 ENST00000300093 ENST00000341590 ENST00000392185 ENST00000216121 ENST00000261483 ENST00000223095 ENST00000263620 ENST00000302475 ENST00000297350 ENST00000315717 ENST00000357736 ENST00000549183 ENST00000376957 ENST00000263895 ENST00000348225 ENST00000314797 ENST00000336023 ENST00000325551 ENST00000612661 ENST00000368097 ENST00000330459 ENST00000261799 ENST00000271588 ENST00000375915 ENST00000266458 ENST00000374694 ENST00000308508 ENST00000309575 ENST00000370206 ENST00000378827 ENST00000280527 ENST00000388820 ENST00000329759 ENST00000239231 ENST00000400337 ENST00000409829 ENST00000325888 ENST00000395748 ENST00000372764 ENST00000389063 ENST00000371269 ENST00000397463 ENST00000225972 ENST00000354775 ENST00000375400 ENST00000260731 ENST00000578202 ENST00000075120 ENST00000244745 ENST00000249749 ENST00000298198 ENST00000368010 ENST00000369500 ENST00000526144 ENST00000257497
