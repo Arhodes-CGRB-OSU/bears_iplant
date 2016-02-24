@@ -123,6 +123,27 @@ kallisto quant -i ~/analysis/bears_iplant/annotation/human_trans.kidx -b 30 --bi
   -o ~/analysis/bears_iplant/results/paired/SRR493366/kallisto \
   ~/analysis/bears_iplant/data/SRR493366/SRR493366_1.fastq.gz ~/analysis/bears_iplant/data/SRR493366/SRR493366_2.fastq.gz
 ```
+These lines will output to your screen while Kallisto is running.  The [bstrp] line will count up to 30, since we chose -b 30 in our command line.  This run
+
+```
+[quant] fragment length distribution will be estimated from the data
+[index] k-mer length: 31
+[index] number of targets: 173,259
+[index] number of k-mers: 104,344,666
+[index] number of equivalence classes: 695,212
+[quant] running in paired-end mode
+[quant] will process pair 1: /nfs1/Teaching/home/rhodesad_rna_w16/analysis/bears_iplant/data/SRR493366/SRR493366_1.fastq.gz
+                             /nfs1/Teaching/home/rhodesad_rna_w16/analysis/bears_iplant/data/SRR493366/SRR493366_2.fastq.gz
+[quant] finding pseudoalignments for the reads ... done
+[quant] learning parameters for sequence specific bias
+[quant] processed 15,117,833 reads, 14,114,661 reads pseudoaligned
+[quant] estimated average fragment length: 170.192
+[   em] quantifying the abundances ... done
+[   em] the Expectation-Maximization algorithm ran for 1,595 rounds
+[bstrp] number of EM bootstraps complete: 30: 17
+
+2253.668u 7.747s 20:30.42 183.7%	0+0k 10066352+49576io 0pf+0w
+```
 
 ### output
 
