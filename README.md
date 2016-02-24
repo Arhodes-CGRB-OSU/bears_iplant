@@ -413,3 +413,9 @@ sleuth_live(so)
 Notes:
 
 The fragment length distribution is only available for the file we ran during this exercise (SRR49336)
+
+Try plugging in the gene "ABCC4" in gene view (in the first tab analyses).  It will show the results of three transcripts that map to this gene.  Leave the other dropdown boxes as their default values.
+
+Find another gene of interest by looking at test table, leaving the table type as transcript table, and scrolling all the way over to the right to see the names of genes.
+
+
