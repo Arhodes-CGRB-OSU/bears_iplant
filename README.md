@@ -331,6 +331,8 @@ Since the gene names are not automatically in the annotation, we need to get
 them from elsewhere. `biomaRt` provide a good way of getting the mappings for
 Ensembl annotations.
 
+This will take some time because it is downloading information over the internet.  Go get some coffee or stretch while this is running.
+
 ```r
 # get the gene names using biomaRt
 mart <- biomaRt::useMart(biomart = "ENSEMBL_MART_ENSEMBL",
