@@ -50,3 +50,4 @@ models(so)
 
 # open up the shiny object for interactive analysis
 sleuth_live(so)
+
