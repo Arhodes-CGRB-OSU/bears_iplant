@@ -180,7 +180,7 @@ If you chose to run your own program on the infrastructure, but your results dir
 
 If you want to compress the directories before downloading, here is the command line:
 ```
-tar -zcvf ~/analysis/iplant_bears/results.tar.gz ~/analysis/iplant_bears/results/
+tar -zcvf ~/analysis/bears_iplant/results.tar.gz ~/analysis/bears_iplant/results/
 ```
 -------------------------
 
