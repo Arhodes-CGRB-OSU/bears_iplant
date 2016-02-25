@@ -265,7 +265,7 @@ experiment, but the column names can be pretty much any valid string.
 Our data is pretty simple in that there is only one covariate here: the
 experimental condition.
 
-This is what the file looks like by clicking on this link ['sample_info.txv'](https://raw.githubusercontent.com/Arhodes-CGRB-OSU/bears_iplant/gh-pages/metadata/sample_info.tsv):
+This is what the file looks like by clicking on this link ['sample_info.tsv'](https://raw.githubusercontent.com/Arhodes-CGRB-OSU/bears_iplant/gh-pages/metadata/sample_info.tsv):
 
 This file was generated during our callisto run and can be found on the infrastructure by:
 ```bash
