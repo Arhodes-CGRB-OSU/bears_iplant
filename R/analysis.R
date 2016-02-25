@@ -8,7 +8,7 @@ library('cowplot')
 base_dir <- '..'
 
 # get the sample to covariate mapping
-s2c <- read.table(file.path(base_dir, 'metadata', 'sample_info.tsv'),
+s2c <- read.delim("https://raw.githubusercontent.com/Arhodes-CGRB-OSU/bears_iplant/gh-pages/metadata/sample_info.tsv",sep ="\t",header = T),
   header = TRUE, stringsAsFactors = FALSE)
 
 # get the sample id names
